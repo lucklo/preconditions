@@ -1,0 +1,27 @@
+{
+    "name": "lucklo/preconditions",
+    "type": "library",
+    "description": "PHP Preconditions",
+    "keywords": [
+        "preconditions"
+    ],
+    "homepage": "https://github.com/lucklo/preconditions",
+    "license": "Apache2",
+    "authors": [
+        {
+            "name": "Łukasz Łoboda",
+            "email": "lukasz.w.loboda@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.6.0"
+    },
+    "autoload": {
+        "files": [
+            "src/Functions.php"
+        ],
+        "psr-4": {
+            "Preconditions\\": "src"
+        }
+    }
+}
