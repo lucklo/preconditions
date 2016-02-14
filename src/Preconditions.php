@@ -32,7 +32,7 @@ class Preconditions
      *
      * @return Preconditions
      */
-    static function getInstance()
+    static public function getInstance()
     {
         if (empty(self::$instance)) {
            self::$instance = new self();
@@ -152,13 +152,7 @@ class Preconditions
      */
     protected function getBadElementIndex($index, $size, $desc)
     {
-        if ($index < 0) {
-            return sprintf("%s (%s) must not be negative", $desc, $index);
-        } elseif ($size < 0) {
-            throw new IllegalArgumentException("Negative size: " . $size);
-        } else {
-            return sprintf("%s (%s) must be less than size (%s)", $desc, $index, $size);
-        }
+        return $this->getBadValueMessage($index, $size, $desc, "%s (%s) must be less than size (%s)");
     }
 
 
@@ -199,13 +193,7 @@ class Preconditions
      */
     protected function getBadPositionIndex($index, $size, $desc)
     {
-        if ($index < 0) {
-            return sprintf("%s (%s) must not be negative", $desc, $index);
-        } elseif ($size < 0) {
-            throw new IllegalArgumentException("Negative size: ".$size);
-        } else {
-            return sprintf("%s (%s) must not be greater than size (%s)", $desc, $index, $size);
-        }
+        return $this->getBadValueMessage($index, $size, $desc, "%s (%s) must not be greater than size (%s)");
     }
 
     /**
@@ -250,6 +238,28 @@ class Preconditions
         }
 
         return sprintf("End Index (%s) must not be less than start index (%s)", $end, $start);
+    }
+
+    /**
+     * Generic Method for generating bad index error messages
+     *
+     * @param int $index    User-supplied index identifying an element of an array or string
+     * @param int $size     Size of that array or string
+     * @param string $desc  Text to use to describe this index in an error message
+     *
+     * @param $message      Message template that should be used
+     *
+     * @return string   Error Message
+     */
+    protected function getBadValueMessage($index, $size, $desc, $message)
+    {
+        if ($index < 0) {
+            return sprintf("%s (%s) must not be negative", $desc, $index);
+        } elseif ($size < 0) {
+            throw new IllegalArgumentException("Negative size: " . $size);
+        } else {
+            return sprintf($message, $desc, $index, $size);
+        }
     }
 
 }
