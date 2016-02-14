@@ -231,9 +231,7 @@ class Preconditions
     {
         if ($start < 0 || $start > $size) {
             return $this->getBadPositionIndex($start, $size, "Start Index");
-        }
-
-        if ($end < 0 || $end > $size) {
+        } elseif ($end < 0 || $end > $size) {
             return $this->getBadPositionIndex($end, $size, "End Index");
         }
 
