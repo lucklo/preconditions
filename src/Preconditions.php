@@ -42,10 +42,11 @@ class Preconditions
     }
 
     /**
-     *
+     * Produce Error messages. It determines whether message params has been provided.
      *
      * @param null $errorMessageOrTemplate      Error message or message template for the exception message.
      * @param array $errorMessageParams         Params for Error Message Template. Internally for sprintf()
+     *
      * @return string
      */
     private function getErrorMessage($errorMessageOrTemplate = null, $errorMessageParams)
@@ -61,9 +62,10 @@ class Preconditions
     /**
      * Ensures the truth of an expression involving one or more parameters to the calling method.
      *
-     * @param boolean $expression
+     * @param boolean $expression               Expression to check for validity
      * @param null $errorMessageOrTemplate      Error message or message template for the exception message.
      * @param array ...$errorMessageParams      Params for Error Message Template. Internally for sprintf()
+     *
      * @throws IllegalArgumentException
      */
     public function checkArgument($expression, $errorMessageOrTemplate = null, ...$errorMessageParams)
@@ -129,7 +131,7 @@ class Preconditions
      * @throws IndexOutOfBoundsException    When $index is negative or is not less than $size
      * @throws IllegalArgumentException     When size is negative
      */
-    public function checkElement($index, $size, $desc = "Index")
+    public function checkElementIndex($index, $size, $desc = "Index")
     {
         if ($index < 0 || $index >= $size) {
             throw new IndexOutOfBoundsException(
